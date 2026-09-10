@@ -87,6 +87,11 @@ public class TarefaService {
         );
     }
 
+    public List<Tarefa> listarOrdenadasPorPrioridade() {
+        ordenarPorPrioridades();
+        return repository.listar();
+    }
+
     public List<Tarefa> listarPorStatus(Status status) {
         return repository.listar()
                 .stream()
