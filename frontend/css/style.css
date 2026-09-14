@@ -270,6 +270,76 @@ main {
     font-weight: 500;
 }
 
+/* ================================
+   AÇÕES EM MASSA
+================================ */
+
+.bulk-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    margin-bottom: 24px;
+    padding: 16px 20px;
+
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    border-radius: 10px;
+
+    background: rgba(255, 255, 255, 0.02);
+}
+
+.bulk-actions label {
+    color: #7f8da3;
+    font-size: 11px;
+    letter-spacing: 0.5px;
+}
+
+.bulk-actions select {
+    padding: 9px 12px;
+
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 7px;
+
+    background: #111620;
+    color: #dce3ed;
+
+    outline: none;
+    cursor: pointer;
+}
+
+.bulk-actions button {
+    padding: 9px 16px;
+
+    border: 1px solid rgba(125, 211, 252, 0.2);
+    border-radius: 7px;
+
+    background: transparent;
+    color: #7dd3fc;
+
+    font-size: 11px;
+    cursor: pointer;
+
+    transition: 0.3s;
+}
+
+.bulk-actions button:hover {
+    background: rgba(125, 211, 252, 0.1);
+}
+
+
+/* ================================
+   CHECKBOX DAS TAREFAS
+================================ */
+
+.task-checkbox {
+    width: 17px;
+    height: 17px;
+
+    margin: 0;
+
+    cursor: pointer;
+}
+
 
 /* ================================
    FILTRO
@@ -317,7 +387,7 @@ main {
 .task-card {
     display: grid;
 
-    grid-template-columns: 120px 1fr auto;
+    grid-template-columns: 20px 120px 1fr auto;
 
     gap: 25px;
 
@@ -709,6 +779,11 @@ main {
 
     .statistics {
         grid-template-columns: 1fr;
+        
+    }
+
+    .stat-card {
+        text-align: center;
     }
 
     .hero {
@@ -721,18 +796,31 @@ main {
 
     .section-header {
         align-items: flex-start;
-
         flex-direction: column;
-
         gap: 20px;
     }
 
     .filter {
         width: 100%;
+        min-width: 0;
     }
 
     .filter select {
         flex: 1;
+        min-width: 0;
+    }
+
+    .bulk-actions {
+        width: 100%;
+        min-width: 0;
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    .bulk-actions select,
+    .bulk-actions button {
+        width: 100%;
+        min-width: 0;
     }
 
     .form-row {
@@ -745,7 +833,6 @@ main {
 
     .task-information {
         flex-direction: column;
-
         gap: 8px;
     }
 

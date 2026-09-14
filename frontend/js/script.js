@@ -1,11 +1,18 @@
 // ESTADO DA APLICAÇÃO
 
-const tarefas = [];
+const tarefas = JSON.parse(localStorage.getItem("tarefas")) || [];
 
 let editandoPorId = null;
 
-let proximoId = 1;
+// DEFINE O PRÓXIMO ID DISPONÍVEL
+let proximoId =
+  tarefas.length > 0 ? Math.max(...tarefas.map((tarefa) => tarefa.id)) + 1 : 1;
 
+// PERSISTÊNCIA
+
+const salvarTarefas = () => {
+  localStorage.setItem("tarefas", JSON.stringify(tarefas));
+};
 
 // ELEMENTOS DA INTERFACE
 
@@ -27,11 +34,43 @@ const filtroStatus = document.getElementById("filtro-status");
 
 const botaoLimpar = formulario.querySelector('button[type="reset"]');
 
+const statusMultiplo = document.getElementById("status-multiplo");
+
+const botaoStatusMultiplo = document.getElementById("btn-status-multiplo");
+
+
+//SETAR STATUS MULTIPLAS TAREFAS
+
+botaoStatusMultiplo.addEventListener("click", () => {  
+
+  const checkboxesSelecionados = document.querySelectorAll(
+    ".task-checkbox:checked"
+  );
+
+  const idsSelecionados = Array.from(checkboxesSelecionados).map((checkbox) => {
+    return Number(checkbox.dataset.id);
+  });  
+
+  const tarefasSelecionadas = tarefas.filter((tarefa) => {
+    return idsSelecionados.includes(tarefa.id);
+  });  
+
+  const novoStatus = statusMultiplo.value;  
+
+  tarefasSelecionadas.forEach((tarefa) => {
+    tarefa.status = novoStatus;
+  });
+
+  salvarTarefas();
+
+  renderizarTarefas(); 
+
+});
 
 
 // ADICIONANDO FILTRO POR STATUS
 
-filtroStatus.addEventListener("change", () => {  
+filtroStatus.addEventListener("change", () => {
   renderizarTarefas();
 });
 
@@ -46,23 +85,21 @@ formulario.addEventListener("submit", (event) => {
   const prioridade = Number(document.getElementById("prioridade").value);
   const categoria = document.getElementById("categoria").value;
   const status = document.getElementById("status").value;
-  
 
-  if (editandoPorId === null) {  
-  const tarefa = {
-    id: proximoId++,
-    nome: nome,
-    descricao: descricao,
-    dataTermino: dataTermino,
-    prioridade: prioridade,
-    categoria: categoria,
-    status: status,
-  };
-  
+  if (editandoPorId === null) {
+    const tarefa = {
+      id: proximoId++,
+      nome: nome,
+      descricao: descricao,
+      dataTermino: dataTermino,
+      prioridade: prioridade,
+      categoria: categoria,
+      status: status,
+    };
+
     tarefas.push(tarefa);
-
+    salvarTarefas();
   } else {
-
     const tarefaExistente = tarefas.find((tarefa) => {
       return tarefa.id === editandoPorId;
     });
@@ -73,6 +110,8 @@ formulario.addEventListener("submit", (event) => {
     tarefaExistente.prioridade = prioridade;
     tarefaExistente.categoria = categoria;
     tarefaExistente.status = status;
+
+    salvarTarefas();
   }
 
   editandoPorId = null;
@@ -105,7 +144,6 @@ const atualizarEstatisticas = () => {
 //RENDERIZAR TAREFAS
 
 const renderizarTarefas = () => {
-
   listaTarefas.innerHTML = "";
 
   atualizarEstatisticas();
@@ -113,7 +151,6 @@ const renderizarTarefas = () => {
   const statusSelecionado = filtroStatus.value;
 
   const tarefasFiltradas = tarefas.filter((tarefa) => {
-
     if (statusSelecionado === "TODOS") {
       return true;
     }
@@ -122,7 +159,6 @@ const renderizarTarefas = () => {
   });
 
   if (tarefasFiltradas.length === 0) {
-
     listaTarefas.innerHTML = `
       <div class="empty-state">
         <h3>Nenhuma tarefa encontrada</h3>
@@ -134,11 +170,16 @@ const renderizarTarefas = () => {
   }
 
   tarefasFiltradas.forEach((tarefa) => {
-
     const classeStatus = `status-${tarefa.status.toLowerCase()}`;
 
     const tarefaHTML = `
       <div class="task-card">
+
+        <input
+          type="checkbox"
+          class="task-checkbox"
+          data-id="${tarefa.id}"
+        >
 
         <div class="task-priority">
           PRIORIDADE ${tarefa.prioridade}
@@ -186,7 +227,6 @@ const renderizarTarefas = () => {
   });
 };
 
-
 // BOTÃO EDITAR
 
 listaTarefas.addEventListener("click", (event) => {
@@ -197,7 +237,7 @@ listaTarefas.addEventListener("click", (event) => {
 
     const tarefa = tarefas.find((tarefa) => {
       return tarefa.id === id;
-    });    
+    });
 
     document.getElementById("nome").value = tarefa.nome;
     document.getElementById("descricao").value = tarefa.descricao;
@@ -213,7 +253,9 @@ listaTarefas.addEventListener("click", (event) => {
     const id = Number(event.target.dataset.id);
 
     if (editandoPorId === id) {
-        return alert("Não é possível excluir uma tarefa durante a edição da mesma!");
+      return alert(
+        "Não é possível excluir uma tarefa durante a edição da mesma!",
+      );
     }
 
     const indice = tarefas.findIndex((tarefa) => {
@@ -221,18 +263,20 @@ listaTarefas.addEventListener("click", (event) => {
     });
 
     tarefas.splice(indice, 1);
+    salvarTarefas();
 
     renderizarTarefas();
   }
 });
 
-
 //BOTAO PARA LIMPAR FORMULARIO
 
 botaoLimpar.addEventListener("click", () => {
-
   editandoPorId = null;
 
   botaoSubmit.textContent = "Criar tarefa";
-
 });
+
+// CARREGAR TAREFAS AO ABRIR A APLICAÇÃO
+
+renderizarTarefas();
