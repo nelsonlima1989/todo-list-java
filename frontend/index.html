@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>TODOLIST</title>
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <header class="header">
+        <div class="logo">            
+            <span>TODOLIST</span>
+        </div>
+
+        <nav class="navigation">
+            <a href="#dashboard">Dashboard</a>
+            <a href="#tarefas">Tarefas</a>
+            <a href="#nova-tarefa">Nova tarefa</a>
+        </nav>
+    </header>
+
+
+    <main>
+
+        <section class="hero" id="dashboard">
+
+            <div class="hero-content">
+                <span class="hero-label">GERENCIADOR DE TAREFAS</span>
+
+                <h1>
+                    Organize seu
+                    <span>fluxo.</span>
+                </h1>
+
+                <p>
+                    Gerencie suas tarefas, acompanhe seu progresso
+                    e mantenha seu trabalho organizado.
+                </p>
+            </div>
+
+        </section>
+
+
+        <section class="statistics">
+
+            <div class="stat-card">
+                <span class="stat-label">TOTAL</span>
+                <strong id="total-tarefas">0</strong>
+                <span class="stat-description">tarefas cadastradas</span>
+            </div>
+
+            <div class="stat-card">
+                <span class="stat-label">TODO</span>
+                <strong id="tarefas-todo">0</strong>
+                <span class="stat-description">aguardando início</span>
+            </div>
+
+            <div class="stat-card">
+                <span class="stat-label">DOING</span>
+                <strong id="tarefas-doing">0</strong>
+                <span class="stat-description">em andamento</span>
+            </div>
+
+            <div class="stat-card">
+                <span class="stat-label">DONE</span>
+                <strong id="tarefas-done">0</strong>
+                <span class="stat-description">concluídas</span>
+            </div>
+
+        </section>
+
+
+        <section class="content">
+
+            <div class="section-header" id="tarefas">
+
+                <div>
+                    <span class="section-label">PAINEL DE TAREFAS</span>
+                    <h2>Minhas tarefas</h2>
+                </div>
+
+                <div class="filter">
+                    <label for="filtro-status">Status</label>
+
+                    <select id="filtro-status">
+                        <option value="TODOS">Todos</option>
+                        <option value="TODO">TODO</option>
+                        <option value="DOING">DOING</option>
+                        <option value="DONE">DONE</option>
+                    </select>
+                </div>
+
+            </div>
+
+
+            <div class="task-list" id="lista-tarefas">
+
+                <div>
+                    <h3>Nenhuma tarefa encontrada</h3>                    
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <section class="task-form-section" id="nova-tarefa">
+
+            <div class="section-header">
+
+                <div>
+                    <span class="section-label">EDITOR DE TAREFAS</span>
+                    <h2>Nova tarefa</h2>
+                </div>
+
+                <span class="form-mode">
+                    CRIE SUA NOVA TAREFA AQUI!
+                </span>
+
+            </div>
+
+
+            <form id="form-tarefa">
+
+                <div class="form-group">
+                    <label for="nome">Nome da tarefa</label>
+                    <input
+                        type="text"
+                        id="nome"
+                        name="nome"
+                        placeholder="Digite o nome da tarefa"
+                    >
+                </div>
+
+
+                <div class="form-group">
+                    <label for="descricao">Descrição</label>
+
+                    <textarea
+                        id="descricao"
+                        name="descricao"
+                        placeholder="Descreva a tarefa"
+                    ></textarea>
+                </div>
+
+
+                <div class="form-row">
+
+                    <div class="form-group">
+                        <label for="data-termino">Data de término</label>
+
+                        <input
+                            type="date"
+                            id="data-termino"
+                            name="dataTermino"
+                        >
+                    </div>
+
+
+                    <div class="form-group">
+                        <label for="prioridade">Prioridade</label>
+
+                        <select id="prioridade" name="prioridade" required>
+                            <option value="">Selecione</option>
+                            <option value="1">1 — Alta</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5 — Baixa</option>
+                        </select>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label for="categoria">Categoria</label>
+
+                        <input
+                            type="text"
+                            id="categoria"
+                            name="categoria"
+                            placeholder="Ex: Desenvolvimento"
+                        >
+                    </div>
+
+
+                    <div class="form-group">
+                        <label for="status">Status</label>
+
+                        <select id="status" name="status">
+                            <option value="TODO">TODO</option>
+                            <option value="DOING">DOING</option>
+                            <option value="DONE">DONE</option>
+                        </select>
+                    </div>
+
+                </div>
+
+
+                <div class="form-actions">
+
+                    <button type="reset" class="btn-secondary">
+                        Limpar
+                    </button>
+
+                    <button type="submit" class="btn-primary">
+                        Criar tarefa
+                    </button>
+
+                </div>
+
+            </form>
+
+        </section>
+
+    </main>
+
+
+    <footer class="footer">
+        <span>TODOLIST</span>
+        <span>GERENCIADOR DE TAREFAS</span>
+    </footer>
+
+
+    <script src="js/script.js"></script>
+
+</body>
+
+</html>

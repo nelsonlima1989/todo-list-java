@@ -1,0 +1,807 @@
+/* ================================
+   RESET
+================================ */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+/* ================================
+   CONFIGURAÇÕES GERAIS
+================================ */
+
+body {
+    min-height: 100vh;
+
+    font-family: Arial, Helvetica, sans-serif;
+
+    background:
+        radial-gradient(
+            circle at 20% 20%,
+            rgba(0, 180, 255, 0.12),
+            transparent 30%
+        ),
+        radial-gradient(
+            circle at 80% 80%,
+            rgba(120, 60, 255, 0.12),
+            transparent 30%
+        ),
+        #080b12;
+
+    color: #f5f7fa;
+}
+
+
+/* ================================
+   HEADER
+================================ */
+
+.header {
+    width: 100%;
+    height: 72px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 6%;
+
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+
+    background: rgba(8, 11, 18, 0.75);
+
+    backdrop-filter: blur(12px);
+}
+
+
+/* LOGO */
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    font-size: 16px;
+    font-weight: bold;
+    letter-spacing: 2px;
+}
+
+
+/* NAVEGAÇÃO */
+
+.navigation {
+    display: flex;
+    gap: 30px;
+}
+
+.navigation a {
+    color: #aeb6c5;
+
+    text-decoration: none;
+
+    font-size: 14px;
+
+    transition: 0.3s;
+}
+
+.navigation a:hover {
+    color: #ffffff;
+}
+
+
+/* ================================
+   CONTEÚDO PRINCIPAL
+================================ */
+
+main {
+    width: 88%;
+    max-width: 1400px;
+
+    margin: 0 auto;
+}
+
+
+/* ================================
+   HERO
+================================ */
+
+.hero {
+    min-height: 300px;
+
+    display: flex;
+    align-items: center;
+
+    padding: 70px 0;
+}
+
+.hero-content {
+    max-width: 800px;
+}
+
+.hero-label,
+.section-label {
+    display: block;
+
+    margin-bottom: 14px;
+
+    font-size: 11px;
+
+    letter-spacing: 3px;
+
+    color: #7f8da3;
+}
+
+.hero h1 {
+    font-size: clamp(42px, 6vw, 76px);
+
+    line-height: 1;
+
+    margin-bottom: 25px;
+}
+
+.hero h1 span {
+    background: linear-gradient(
+        90deg,
+        #ffffff,
+        #7dd3fc,
+        #a78bfa
+    );
+
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.hero p {
+    max-width: 550px;
+
+    color: #8994a7;
+
+    font-size: 17px;
+
+    line-height: 1.7;
+}
+
+
+/* ================================
+   RESPONSIVIDADE DO HEADER
+================================ */
+
+@media (max-width: 700px) {
+
+    .navigation {
+        display: none;
+    }
+
+    .header {
+        padding: 0 5%;
+    }
+
+    main {
+        width: 90%;
+    }
+
+}
+
+/* ================================
+   ESTATÍSTICAS
+================================ */
+
+.statistics {
+    display: grid;
+
+    grid-template-columns: repeat(4, 1fr);
+
+    gap: 18px;
+
+    margin-bottom: 90px;
+}
+
+.stat-card {
+    padding: 28px;
+
+    border: 1px solid rgba(255, 255, 255, 0.08);
+
+    border-radius: 16px;
+
+    background: rgba(255, 255, 255, 0.03);
+
+    backdrop-filter: blur(12px);
+
+    transition: 0.3s;
+}
+
+.stat-card:hover {
+    transform: translateY(-4px);
+
+    border-color: rgba(125, 211, 252, 0.25);
+
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.stat-label {
+    display: block;
+
+    margin-bottom: 18px;
+
+    font-size: 11px;
+
+    letter-spacing: 2px;
+
+    color: #7f8da3;
+}
+
+.stat-card strong {
+    display: block;
+
+    margin-bottom: 8px;
+
+    font-size: 36px;
+
+    font-weight: 600;
+}
+
+.stat-description {
+    color: #687386;
+
+    font-size: 13px;
+}
+
+/* ================================
+   ÁREA DE TAREFAS
+================================ */
+
+.content {
+    margin-bottom: 90px;
+}
+
+.section-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+
+    margin-bottom: 28px;
+}
+
+.section-header h2 {
+    font-size: 30px;
+    font-weight: 500;
+}
+
+
+/* ================================
+   FILTRO
+================================ */
+
+.filter {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.filter label {
+    font-size: 12px;
+    color: #687386;
+}
+
+.filter select {
+    min-width: 120px;
+
+    padding: 10px 14px;
+
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 8px;
+
+    background: #111620;
+    color: #dce3ed;
+
+    outline: none;
+
+    cursor: pointer;
+}
+
+
+/* ================================
+   CARD DA TAREFA
+================================ */
+
+.task-list {
+    display: flex;
+    flex-direction: column;
+
+    gap: 14px;
+}
+
+.task-card {
+    display: grid;
+
+    grid-template-columns: 120px 1fr auto;
+
+    gap: 25px;
+
+    align-items: center;
+
+    padding: 25px 28px;
+
+    border: 1px solid rgba(255, 255, 255, 0.07);
+
+    border-radius: 14px;
+
+    background: rgba(255, 255, 255, 0.025);
+
+    backdrop-filter: blur(10px);
+
+    transition: 0.3s;
+}
+
+.task-card:hover {
+    border-color: rgba(125, 211, 252, 0.2);
+
+    background: rgba(255, 255, 255, 0.045);
+
+    transform: translateX(4px);
+}
+
+
+/* ================================
+   PRIORIDADE
+================================ */
+
+.task-priority {
+    align-self: start;
+
+    font-size: 10px;
+
+    letter-spacing: 1.5px;
+
+    color: #7f8da3;
+}
+
+
+/* ================================
+   CONTEÚDO DA TAREFA
+================================ */
+
+.task-header {
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+
+    margin-bottom: 10px;
+}
+
+.task-header h3 {
+    font-size: 18px;
+
+    font-weight: 500;
+}
+
+.task-content p {
+    max-width: 700px;
+
+    margin-bottom: 15px;
+
+    color: #788497;
+
+    font-size: 13px;
+
+    line-height: 1.6;
+}
+
+
+/* ================================
+   STATUS
+================================ */
+
+.task-status {
+    padding: 5px 9px;
+
+    border-radius: 5px;
+
+    font-size: 9px;
+
+    font-weight: bold;
+
+    letter-spacing: 1px;
+}
+
+.status-doing {
+    background: rgba(125, 211, 252, 0.1);
+
+    color: #7dd3fc;
+}
+
+.status-todo {
+    background: rgba(167, 139, 250, 0.1);
+    color: #f7ff02;
+}
+
+.status-done {
+    background: rgba(74, 222, 128, 0.1);
+    color: #4ade80;
+}
+
+
+/* ================================
+   INFORMAÇÕES
+================================ */
+
+.task-information {
+    display: flex;
+
+    gap: 20px;
+
+    color: #596577;
+
+    font-size: 11px;
+}
+
+
+/* ================================
+   AÇÕES
+================================ */
+
+.task-actions {
+    display: flex;
+
+    gap: 8px;
+}
+
+.task-actions button {
+    padding: 9px 14px;
+
+    border-radius: 7px;
+
+    font-size: 11px;
+
+    cursor: pointer;
+
+    transition: 0.3s;
+}
+
+.btn-edit {
+    border: 1px solid rgba(125, 211, 252, 0.2);
+
+    background: transparent;
+
+    color: #7dd3fc;
+}
+
+.btn-edit:hover {
+    background: rgba(125, 211, 252, 0.1);
+}
+
+.btn-delete {
+    border: 1px solid rgba(255, 255, 255, 0.08);
+
+    background: transparent;
+
+    color: #788497;
+}
+
+.btn-delete:hover {
+    border-color: rgba(255, 100, 100, 0.3);
+
+    color: #ff8b8b;
+}
+
+/* ================================
+   FORMULÁRIO DE TAREFA
+================================ */
+
+.task-form-section {
+    margin-bottom: 90px;
+
+    padding: 35px;
+
+    border: 1px solid rgba(255, 255, 255, 0.08);
+
+    border-radius: 18px;
+
+    background: rgba(255, 255, 255, 0.025);
+
+    backdrop-filter: blur(12px);
+}
+
+
+/* TÍTULO DO FORMULÁRIO */
+
+.task-form-section .section-header {
+    margin-bottom: 35px;
+}
+
+.form-mode {
+    padding: 7px 12px;
+
+    border: 1px solid rgba(167, 139, 250, 0.2);
+
+    border-radius: 6px;
+
+    color: #a78bfa;
+
+    font-size: 9px;
+
+    font-weight: bold;
+
+    letter-spacing: 1.5px;
+}
+
+
+/* ================================
+   CAMPOS
+================================ */
+
+#form-tarefa {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 22px;
+}
+
+.form-group {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 9px;
+}
+
+.form-group label {
+    color: #8b96a8;
+
+    font-size: 11px;
+
+    letter-spacing: 0.5px;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+    width: 100%;
+
+    padding: 13px 15px;
+
+    border: 1px solid rgba(255, 255, 255, 0.08);
+
+    border-radius: 8px;
+
+    outline: none;
+
+    background: rgba(0, 0, 0, 0.2);
+
+    color: #e8edf5;
+
+    font-family: inherit;
+
+    font-size: 13px;
+
+    transition: 0.3s;
+}
+
+
+/* FOCO */
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+    border-color: rgba(125, 211, 252, 0.5);
+
+    background: rgba(0, 0, 0, 0.3);
+
+    box-shadow: 0 0 0 3px rgba(125, 211, 252, 0.05);
+}
+
+
+/* PLACEHOLDER */
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+    color: #4f5a6b;
+}
+
+
+/* DESCRIÇÃO */
+
+.form-group textarea {
+    min-height: 120px;
+
+    resize: vertical;
+}
+
+
+/* ================================
+   LINHA DOS CAMPOS
+================================ */
+
+.form-row {
+    display: grid;
+
+    grid-template-columns: repeat(4, 1fr);
+
+    gap: 18px;
+}
+
+
+/* ================================
+   BOTÕES DO FORMULÁRIO
+================================ */
+
+.form-actions {
+    display: flex;
+
+    justify-content: flex-end;
+
+    gap: 10px;
+
+    margin-top: 10px;
+}
+
+.form-actions button {
+    padding: 11px 20px;
+
+    border-radius: 8px;
+
+    font-size: 12px;
+
+    cursor: pointer;
+
+    transition: 0.3s;
+}
+
+.btn-secondary {
+    border: 1px solid rgba(255, 255, 255, 0.08);
+
+    background: transparent;
+
+    color: #7f8da3;
+}
+
+.btn-secondary:hover {
+    color: #ffffff;
+
+    background: rgba(255, 255, 255, 0.04);
+}
+
+.btn-primary {
+    border: 1px solid rgba(125, 211, 252, 0.3);
+
+    background: rgba(125, 211, 252, 0.1);
+
+    color: #7dd3fc;
+}
+
+.btn-primary:hover {
+    background: rgba(125, 211, 252, 0.18);
+
+    box-shadow: 0 0 20px rgba(125, 211, 252, 0.08);
+}
+
+/* ================================
+   RESPONSIVIDADE
+================================ */
+
+@media (max-width: 900px) {
+
+    .statistics {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .form-row {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .task-card {
+        grid-template-columns: 1fr;
+    }
+
+    .task-actions {
+        justify-content: flex-start;
+    }
+}
+
+
+@media (max-width: 600px) {
+
+    .statistics {
+        grid-template-columns: 1fr;
+    }
+
+    .hero {
+        padding: 50px 0;
+    }
+
+    .hero h1 {
+        font-size: 48px;
+    }
+
+    .section-header {
+        align-items: flex-start;
+
+        flex-direction: column;
+
+        gap: 20px;
+    }
+
+    .filter {
+        width: 100%;
+    }
+
+    .filter select {
+        flex: 1;
+    }
+
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+
+    .task-form-section {
+        padding: 22px;
+    }
+
+    .task-information {
+        flex-direction: column;
+
+        gap: 8px;
+    }
+
+    .form-actions {
+        flex-direction: column;
+    }
+
+    .form-actions button {
+        width: 100%;
+    }
+}
+
+
+/* ================================
+   FOOTER
+================================ */
+
+.footer {
+    width: 88%;
+    max-width: 1400px;
+
+    margin: 0 auto;
+
+    padding: 25px 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    border-top: 1px solid rgba(71, 70, 73, 0.132);
+
+    color: #596577;
+
+    font-size: 11px;
+
+    letter-spacing: 0.5px;
+}
+
+.footer span:first-child {
+    color: #8b96a8;
+
+    font-weight: 600;
+
+    letter-spacing: 1.5px;
+}
+
+@media (max-width: 600px) {
+
+    .footer {
+        width: 90%;
+
+        flex-direction: column;
+
+        gap: 8px;
+
+        text-align: center;
+    }
+
+}
