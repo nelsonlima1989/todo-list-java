@@ -1,14 +1,17 @@
-# 📝 TODO List Java
+# 📝 TODO List
 
-Aplicação de gerenciamento de tarefas (**TODO List**) desenvolvida em **Java**, utilizando **Gradle** como ferramenta de build e sem a utilização de frameworks.
+Aplicação de gerenciamento de tarefas (**TODO List**) desenvolvida com **Backend em Java** e **Frontend em HTML, CSS e JavaScript**, utilizando **Gradle** no backend e sem frameworks.
 
-O projeto foi desenvolvido inicialmente apenas com o backend e interação via terminal, permitindo que futuramente seja evoluído para integração com um frontend desenvolvido em JavaScript.
+O projeto começou como uma aplicação Java com interação via terminal e posteriormente recebeu uma interface web desenvolvida em JavaScript puro. Atualmente, o frontend trabalha com dados em memória e ainda não possui comunicação com uma API REST.
 
 ---
 
 ## 📋 Sobre o projeto
 
-A aplicação permite o gerenciamento de tarefas através de um menu interativo no terminal.
+A aplicação permite o gerenciamento de tarefas através de duas interfaces:
+
+- **Backend:** aplicação Java com interação via terminal;
+- **Frontend:** interface web desenvolvida com HTML, CSS e JavaScript.
 
 Cada tarefa possui as seguintes informações:
 
@@ -30,7 +33,7 @@ Os status disponíveis são:
 
 # 🚀 Funcionalidades
 
-A aplicação possui as seguintes funcionalidades:
+## Backend
 
 - Criar tarefas;
 - Listar todas as tarefas;
@@ -43,36 +46,80 @@ A aplicação possui as seguintes funcionalidades:
 - Validação de prioridades;
 - Ordenação automática das tarefas por prioridade.
 
+## Frontend
+
+- Criar uma nova tarefa;
+- Listar tarefas cadastradas;
+- Editar uma tarefa existente;
+- Excluir uma tarefa;
+- Filtrar tarefas por status;
+- Exibir estatísticas das tarefas;
+- Exibir quantidade total de tarefas;
+- Exibir quantidade de tarefas `TODO`, `DOING` e `DONE`;
+- Utilizar o mesmo formulário para criação e edição;
+- Limpar o formulário;
+- Cancelar o modo de edição.
+
+O frontend utiliza um array em memória para armazenar as tarefas durante a execução da página. Os dados são perdidos ao recarregar ou fechar a página.
+
 ---
 
-# 🖥️ Menu da aplicação
+# 🖥️ Interface Frontend
 
-Ao executar a aplicação, será apresentado o seguinte menu:
+A interface web foi desenvolvida com HTML, CSS e JavaScript puro.
+
+O dashboard apresenta:
 
 ```text
-===== TODO LIST =====
-
-1 - Criar tarefa
-2 - Listar tarefas
-3 - Listar por categoria
-4 - Listar por prioridade
-5 - Listar por status
-6 - Alterar status da tarefa
-7 - Remover tarefa
-0 - Sair
+TOTAL
+TODO
+DOING
+DONE
 ```
 
----
+A área de tarefas permite visualizar:
 
-# 🏗️ Estrutura do projeto
+- Prioridade;
+- Nome;
+- Status;
+- Descrição;
+- Categoria;
+- Data de término.
 
-O projeto foi organizado separando as responsabilidades principais da aplicação.
+Também estão disponíveis as ações:
 
 ```text
-todo-list-java
+Editar | Excluir
+```
+
+O formulário permite informar:
+
+```text
+Nome
+Descrição
+Data de término
+Prioridade
+Categoria
+Status
+```
+
+O mesmo formulário é utilizado tanto para criação quanto para edição.
+
+---
+
+# 🧩 Estrutura do projeto
+
+```text
+todo-list
 │
-├── gradle/
-│   └── wrapper/
+├── frontend/
+│   ├── index.html
+│   │
+│   ├── css/
+│   │   └── style.css
+│   │
+│   └── js/
+│       └── script.js
 │
 ├── src/
 │   └── main/
@@ -92,6 +139,9 @@ todo-list-java
 │                   └── service/
 │                       └── TarefaService.java
 │
+├── gradle/
+│   └── wrapper/
+│
 ├── .gitignore
 ├── build.gradle
 ├── settings.gradle
@@ -101,9 +151,11 @@ todo-list-java
 
 ---
 
-# 🧩 Arquitetura da aplicação
+# 🧱 Backend
 
-A aplicação foi organizada através da separação de responsabilidades.
+O backend foi desenvolvido em Java sem utilização de frameworks.
+
+A aplicação possui separação de responsabilidades:
 
 ```text
 Main
@@ -115,63 +167,25 @@ Repository
 Dados
 ```
 
-A comunicação ocorre da seguinte forma:
+Embora o projeto não utilize uma implementação completa do padrão MVC, sua estrutura foi organizada para separar as principais responsabilidades da aplicação.
 
-```text
-Usuário
-   ↓
-Main
-   ↓
-TarefaService
-   ↓
-TarefaRepository
-   ↓
-Lista de tarefas
-```
-
-Embora o projeto não utilize uma implementação completa do padrão MVC, sua estrutura foi organizada de forma a separar as responsabilidades principais da aplicação.
-
----
-
-# ▶️ Main
+## Main
 
 A classe `Main` é responsável pela interação com o usuário através do terminal.
 
-Nela são realizadas operações como:
+Entre suas responsabilidades estão:
 
 - Exibição do menu;
 - Leitura dos dados utilizando `Scanner`;
-- Validação das opções do usuário;
+- Validação das opções;
 - Direcionamento para a funcionalidade selecionada;
 - Exibição dos resultados.
 
-O fluxo geral funciona da seguinte forma:
-
-```text
-Usuário escolhe uma opção
-        ↓
-Main recebe a opção
-        ↓
-Switch identifica a ação
-        ↓
-Service executa a regra de negócio
-        ↓
-Repository manipula os dados
-        ↓
-Resultado é exibido ao usuário
-```
-
----
-
-# 📦 Model
+## Model
 
 O pacote `model` contém as classes que representam os dados da aplicação.
 
-## Tarefa
-
-A classe `Tarefa` representa uma atividade da TODO List.
-
-Uma tarefa possui:
+Uma `Tarefa` possui:
 
 ```text
 ID
@@ -183,25 +197,7 @@ Categoria
 Status
 ```
 
-Exemplo de uma tarefa:
-
-```text
-ID: 1
-Nome: Estudar Java
-Descrição: Estudar orientação a objetos
-Data de término: 2026-09-01
-Prioridade: 1
-Categoria: Estudos
-Status: TODO
-```
-
----
-
-# 🔄 Status
-
-O status das tarefas é representado através de um `enum`.
-
-Os valores disponíveis são:
+O status é representado pelo `enum`:
 
 ```java
 TODO
@@ -209,82 +205,44 @@ DOING
 DONE
 ```
 
-Isso evita a utilização de valores inválidos como:
-
-```text
-Concluído
-Finalizado
-Em andamento
-```
-
-Em vez disso, a aplicação utiliza valores previamente definidos:
-
-```java
-Status.TODO
-Status.DOING
-Status.DONE
-```
-
----
-
-# 🗂️ Repository
+## Repository
 
 A classe `TarefaRepository` é responsável pelo armazenamento e acesso às tarefas.
 
-Atualmente, os dados são armazenados em memória utilizando:
+Atualmente utiliza:
 
 ```java
 List<Tarefa>
 ```
 
-O `Repository` possui responsabilidades como:
+Responsabilidades:
 
 - Adicionar tarefas;
 - Listar tarefas;
-- Buscar uma tarefa pelo ID;
+- Buscar tarefa por ID;
 - Remover tarefas.
 
-A estrutura utilizada é:
+Os dados são armazenados em memória e são perdidos quando a aplicação Java é encerrada.
 
-```text
-TarefaRepository
-        ↓
-List<Tarefa>
-```
+## Service
 
-Como o armazenamento ocorre em memória, os dados são perdidos quando a aplicação é encerrada.
-
----
-
-# ⚙️ Service
-
-A classe `TarefaService` concentra as principais regras de negócio da aplicação.
-
-Entre suas responsabilidades estão:
+A classe `TarefaService` concentra as principais regras de negócio:
 
 - Criar tarefas;
-- Validar a prioridade;
+- Validar prioridade;
 - Listar tarefas;
 - Filtrar por categoria;
 - Filtrar por prioridade;
 - Filtrar por status;
-- Alterar o status;
+- Alterar status;
 - Remover tarefas;
-- Organizar as tarefas de acordo com a prioridade.
-
-Essa separação evita que a classe `Main` concentre todas as responsabilidades da aplicação.
+- Organizar tarefas por prioridade.
 
 ---
 
 # 🔢 Sistema de prioridades
 
-As tarefas possuem prioridade de:
-
-```text
-1 até 5
-```
-
-Onde:
+As tarefas possuem prioridade de `1` até `5`:
 
 ```text
 1 → Maior prioridade
@@ -292,24 +250,6 @@ Onde:
 3 → Média prioridade
 4 → Baixa prioridade
 5 → Menor prioridade
-```
-
-Após uma nova tarefa ser criada, a lista é organizada automaticamente.
-
-Por exemplo, considerando as tarefas:
-
-```text
-Tarefa A → Prioridade 5
-Tarefa B → Prioridade 3
-Tarefa C → Prioridade 1
-```
-
-Após o rebalanceamento da ordem:
-
-```text
-Tarefa C → Prioridade 1
-Tarefa B → Prioridade 3
-Tarefa A → Prioridade 5
 ```
 
 A ordenação é realizada utilizando:
@@ -324,217 +264,190 @@ Dessa forma, tarefas com prioridade `1` aparecem antes das tarefas com prioridad
 
 # 🔍 Filtros
 
-A aplicação permite consultar tarefas utilizando diferentes filtros.
+## Backend
 
-## Por categoria
+O backend permite filtrar tarefas por:
 
-O usuário pode buscar tarefas pertencentes a uma categoria específica.
+- Categoria;
+- Prioridade;
+- Status.
 
-Exemplo:
+## Frontend
 
-```text
-Estudos
-```
-
-Resultado:
+O frontend disponibiliza filtro por status:
 
 ```text
-Estudar Java
-Estudar SQL
-Fazer exercícios
-```
-
-## Por prioridade
-
-O usuário pode listar todas as tarefas que possuem determinada prioridade.
-
-Exemplo:
-
-```text
-Prioridade: 1
-```
-
-Serão exibidas apenas as tarefas que possuem prioridade `1`.
-
-## Por status
-
-Os status disponíveis são:
-
-```text
+Todos
 TODO
 DOING
 DONE
 ```
 
-Por exemplo:
-
-```text
-Status: DONE
-```
-
-A aplicação exibirá apenas as tarefas concluídas.
+Quando o filtro é alterado, a lista é renderizada novamente exibindo somente as tarefas correspondentes ao status selecionado.
 
 ---
 
-# ✏️ Alteração de status
+# ✏️ CRUD no Frontend
 
-O usuário pode alterar o status de uma tarefa informando o seu ID.
+O frontend implementa as operações básicas de gerenciamento de tarefas.
 
-Exemplo:
+### Create — Criar
+
+O usuário preenche o formulário e seleciona:
 
 ```text
-Digite o ID da tarefa: 1
-
-Escolha o novo status:
-
-1 - TODO
-2 - DOING
-3 - DONE
+Criar tarefa
 ```
 
-Fluxo possível:
+A tarefa recebe um ID gerado pelo JavaScript e é adicionada ao array em memória.
+
+### Read — Listar
+
+As tarefas cadastradas são exibidas na área de tarefas, apresentando suas principais informações.
+
+### Update — Editar
+
+Ao selecionar:
 
 ```text
+Editar
+```
+
+os dados da tarefa são carregados no formulário.
+
+Após as alterações, o usuário seleciona:
+
+```text
+Salvar tarefa
+```
+
+A tarefa existente é atualizada sem criar um novo ID.
+
+### Delete — Excluir
+
+Ao selecionar:
+
+```text
+Excluir
+```
+
+a tarefa é removida do array em memória e a interface é atualizada.
+
+---
+
+# 📊 Estatísticas
+
+O dashboard do frontend apresenta automaticamente:
+
+```text
+TOTAL
 TODO
-  ↓
 DOING
-  ↓
 DONE
 ```
 
-A alteração é realizada através do `TarefaService`, que busca a tarefa e atualiza o seu status.
+Os valores são calculados com base nas tarefas armazenadas no array JavaScript.
+
+As estatísticas são atualizadas após as operações realizadas na aplicação.
 
 ---
 
-# 🗑️ Remoção de tarefas
+# 💾 Armazenamento
 
-Uma tarefa pode ser removida através do seu ID.
+Atualmente, tanto o backend quanto o frontend utilizam armazenamento em memória.
 
-Exemplo:
+### Backend
 
-```text
-Digite o ID da tarefa que deseja remover: 2
+```java
+List<Tarefa>
 ```
 
-Se a tarefa existir:
+### Frontend
 
-```text
-Tarefa removida com sucesso!
+```javascript
+const tarefas = [];
 ```
 
-Caso a tarefa não exista:
+Não é utilizado:
 
-```text
-Tarefa não encontrada.
-```
+- Banco de dados;
+- Arquivo de persistência;
+- `localStorage`;
+- API REST.
 
-Os IDs das demais tarefas não são reorganizados após uma remoção.
+Por isso, os dados são perdidos quando a aplicação correspondente é encerrada ou a página do frontend é recarregada.
 
 ---
 
-# 🛡️ Validações
+# 🔌 Comunicação entre Frontend e Backend
 
-A aplicação possui validações para evitar erros durante a utilização.
+A comunicação entre o frontend JavaScript e o backend Java ainda não foi implementada.
 
-## Validação do menu
-
-O sistema verifica se o usuário informou um número válido.
-
-Exemplo de entrada inválida:
+O projeto está preparado para uma futura integração através de uma API REST:
 
 ```text
-abc
+Frontend
+   ↓
+JavaScript
+   ↓
+JSON
+   ↓
+API REST
+   ↓
+Backend Java
+   ↓
+Tarefa
 ```
 
-Resultado:
-
-```text
-Opção inválida. Digite um número.
-```
-
-Também são validadas opções fora do intervalo disponível:
-
-```text
-9
-```
-
-Resultado:
-
-```text
-Opção inválida. Tente novamente.
-```
-
-## Validação de prioridade
-
-A prioridade deve estar entre:
-
-```text
-1 e 5
-```
-
-Entradas como:
-
-```text
-abc
-0
-6
-```
-
-não são aceitas.
-
-O sistema continua solicitando uma nova prioridade até receber um valor válido.
+Atualmente, frontend e backend funcionam de forma independente.
 
 ---
 
-# 🛠️ Tecnologias utilizadas
+# 🛠️ Tecnologias
+
+## Backend
 
 - Java;
 - Gradle;
-- IntelliJ IDEA;
+- Programação Orientada a Objetos;
+- Collections (`List`);
+- `enum`;
 - Git;
 - GitHub.
 
-O projeto foi desenvolvido sem a utilização de frameworks como:
+## Frontend
 
-- Spring;
-- Micronaut;
-- Grails.
+- HTML5;
+- CSS3;
+- JavaScript;
+- Manipulação do DOM;
+- Eventos;
+- Arrays;
+- Objetos;
+- Template strings;
+- CRUD em memória.
 
----
-
-# 📥 Como baixar o projeto
-
-Clone o repositório utilizando Git:
-
-```bash
-git clone URL_DO_REPOSITORIO
-```
-
-Entre na pasta do projeto:
-
-```bash
-cd todo-list-java
-```
+Não foram utilizados frameworks no frontend.
 
 ---
 
-# ▶️ Como executar o projeto
+# ▶️ Executando o Backend
 
-## Linux
+## Linux / macOS
 
-Utilize:
+Na raiz do projeto:
 
 ```bash
 ./gradlew run
 ```
 
-Caso seja necessário fornecer permissão de execução:
+Caso seja necessário fornecer permissão:
 
 ```bash
 chmod +x gradlew
 ```
 
-Depois execute novamente:
+Depois:
 
 ```bash
 ./gradlew run
@@ -542,34 +455,21 @@ Depois execute novamente:
 
 ## Windows
 
-Execute:
-
 ```bash
 gradlew.bat run
 ```
 
-Ou:
-
-```bash
-./gradlew.bat run
-```
-
 ## IntelliJ IDEA
 
-Para executar utilizando o IntelliJ IDEA:
-
-1. Clone ou baixe o repositório;
-2. Abra o IntelliJ IDEA;
-3. Clique em `Open`;
-4. Selecione a pasta do projeto;
-5. Aguarde o Gradle carregar e sincronizar o projeto;
-6. Navegue até:
+1. Abra o projeto no IntelliJ IDEA;
+2. Aguarde o Gradle carregar e sincronizar;
+3. Navegue até:
 
 ```text
 src/main/java/com/todolist/Main.java
 ```
 
-7. Execute o método:
+4. Execute:
 
 ```java
 public static void main(String[] args)
@@ -577,56 +477,78 @@ public static void main(String[] args)
 
 ---
 
-# 📦 Requisitos para execução
+# 🌐 Executando o Frontend
 
-Para executar o projeto é necessário possuir:
+O frontend não possui dependências externas ou processo de build.
 
-- Java instalado;
-- JDK configurado;
-- Git instalado, caso queira clonar o repositório.
+Basta abrir:
 
-O projeto utiliza o **Gradle Wrapper**, portanto não é necessário instalar o Gradle globalmente.
+```text
+frontend/index.html
+```
+
+em um navegador.
+
+Durante o desenvolvimento, também é possível utilizar uma extensão como **Live Server** no VS Code.
 
 ---
 
-# 🔮 Possíveis melhorias futuras
+# 📋 Menu do Backend
 
-Algumas melhorias que podem ser implementadas futuramente:
+Ao executar a aplicação Java pelo terminal:
 
-- Atualização completa de tarefas;
-- Persistência em arquivo;
-- Persistência em banco de dados;
-- Filtro por data;
-- Consulta da quantidade de tarefas por status;
-- Testes automatizados;
-- API REST;
-- Integração com frontend;
-- Interface gráfica;
-- Autenticação de usuários.
+```text
+===== TODO LIST =====
+
+1 - Criar tarefa
+2 - Listar tarefas
+3 - Listar por categoria
+4 - Listar por prioridade
+5 - Listar por status
+6 - Alterar status da tarefa
+7 - Remover tarefa
+0 - Sair
+```
 
 ---
 
 # 🎯 Objetivo do projeto
 
-Este projeto foi desenvolvido com o objetivo de praticar conceitos fundamentais da linguagem Java.
+Este projeto foi desenvolvido com o objetivo de praticar conceitos fundamentais de desenvolvimento de software, inicialmente através da implementação de uma aplicação TODO List em Java e posteriormente através da criação de uma interface web.
 
-Entre os conceitos utilizados estão:
+Entre os conceitos praticados estão:
 
-- Programação orientada a objetos;
+- Programação Orientada a Objetos;
 - Classes e objetos;
 - Encapsulamento;
 - `enum`;
 - `List`;
-- Laços de repetição;
-- Condicionais;
-- `switch`;
-- `Scanner`;
-- Métodos;
-- Separação de responsabilidades;
+- Arrays e objetos JavaScript;
+- Manipulação do DOM;
+- Eventos;
+- Formulários;
+- CRUD;
+- Filtros;
 - Regras de negócio;
+- Separação de responsabilidades;
 - Git;
 - GitHub;
 - Gradle.
+
+---
+
+# 🔮 Possíveis melhorias futuras
+
+- Integração do frontend com uma API REST Java;
+- Comunicação através de requisições HTTP;
+- Persistência em arquivo;
+- Persistência em banco de dados;
+- Filtro por data;
+- Atualização completa de tarefas através da API;
+- Autenticação de usuários;
+- Testes automatizados;
+- Deploy do backend;
+- Deploy do frontend.
 
 ---
 
@@ -634,4 +556,4 @@ Entre os conceitos utilizados estão:
 
 **Nelson Lima**
 
-Projeto desenvolvido para fins de estudo e prática da linguagem Java através da implementação de uma aplicação TODO List.
+Projeto desenvolvido para fins de estudo e prática de desenvolvimento Backend e Frontend através da implementação de uma aplicação TODO List.
