@@ -165,7 +165,7 @@
 ---
 
 ### T05 — Integrar recorrência aos cartões, filtros e dashboard
-- **Status:** `[ ] Pendente`
+- **Status:** `[x] Concluída`
 - **Objetivo:** Exibir a identificação visual de recorrência (`.task-recurrence`) nos cartões de tarefas recorrentes, mantendo os cartões de tarefas avulsas sem badge e assegurando o funcionamento integrado do filtro por status e dos contadores do dashboard.
 - **Descrição das alterações:**
   - Em `frontend/js/script.js`:

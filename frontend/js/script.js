@@ -224,6 +224,12 @@ const atualizarEstatisticas = () => {
 
 //RENDERIZAR TAREFAS
 
+const ROTULOS_RECORRENCIA = Object.freeze({
+  DIARIA: "Diária",
+  SEMANAL: "Semanal",
+  MENSAL: "Mensal",
+});
+
 const renderizarTarefas = () => {
   listaTarefas.innerHTML = "";
 
@@ -252,6 +258,16 @@ const renderizarTarefas = () => {
 
   tarefasFiltradas.forEach((tarefa) => {
     const classeStatus = `status-${tarefa.status.toLowerCase()}`;
+    const rotuloRecorrencia = Object.prototype.hasOwnProperty.call(
+      ROTULOS_RECORRENCIA,
+      tarefa.recorrencia
+    )
+      ? ROTULOS_RECORRENCIA[tarefa.recorrencia]
+      : null;
+
+    const indicadorRecorrenciaHTML = rotuloRecorrencia
+      ? `<span class="task-recurrence">🔁 Recorrência: ${rotuloRecorrencia}</span>`
+      : "";
 
     const tarefaHTML = `
       <div class="task-card">
@@ -285,6 +301,7 @@ const renderizarTarefas = () => {
           <div class="task-information">
             <span>📁 Categoria: ${tarefa.categoria}</span>
             <span>📅 Data: ${tarefa.dataTermino}</span>
+            ${indicadorRecorrenciaHTML}
           </div>
 
         </div>
