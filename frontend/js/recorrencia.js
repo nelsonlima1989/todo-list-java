@@ -71,6 +71,10 @@ const extrairPartesDataISO = (dataTexto) => {
   return { ano, mes, dia };
 };
 
+export const ehDataTerminoValida = (dataTexto) => {
+  return extrairPartesDataISO(dataTexto) !== null;
+};
+
 const resolverDataReferenciaISO = (dataReferenciaHoje) => {
   if (dataReferenciaHoje === undefined || dataReferenciaHoje === null) {
     return obterDataHojeISO();
@@ -99,7 +103,7 @@ const resolverDataReferenciaISO = (dataReferenciaHoje) => {
 // NORMALIZAÇÃO E RETROCOMPATIBILIDADE DE TAREFAS
 
 export const normalizarTarefa = (tarefa) => {
-  if (!tarefa || typeof tarefa !== "object") {
+  if (!tarefa || typeof tarefa !== "object" || Array.isArray(tarefa)) {
     throw new TypeError("O objeto de tarefa informado é inválido.");
   }
 
@@ -275,8 +279,7 @@ export const deveGerarSucessora = (tarefa) => {
     return false;
   }
 
-  const partesData = extrairPartesDataISO(tarefa.dataTermino);
-  return partesData !== null;
+  return ehDataTerminoValida(tarefa.dataTermino);
 };
 
 export const gerarTarefaSucessora = (
