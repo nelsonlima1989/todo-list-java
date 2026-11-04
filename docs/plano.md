@@ -95,7 +95,7 @@
 ---
 
 ### T03 — Integrar campo de recorrência e validação de data de término ao formulário
-- **Status:** `[ ] Pendente`
+- **Status:** `[x] Concluída`
 - **Objetivo:** Adicionar o campo `<select id="recorrencia" name="recorrencia">` ao formulário em `frontend/index.html`, ajustar o grid responsivo em `frontend/css/style.css` e integrar em `frontend/js/script.js` (via ES Modules nativos) a leitura, edição, limpeza, normalização inicial do `localStorage` e obrigatoriedade de `#data-termino` para tarefas recorrentes.
 - **Descrição das alterações:**
   - Em `frontend/index.html`:

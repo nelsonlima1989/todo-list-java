@@ -1,6 +1,10 @@
+import { RECORRENCIAS_VALIDAS, normalizarTarefa } from "./recorrencia.js";
+
 // ESTADO DA APLICAÇÃO
 
-const tarefas = JSON.parse(localStorage.getItem("tarefas")) || [];
+const tarefas = (JSON.parse(localStorage.getItem("tarefas")) || []).map(
+  (tarefa) => normalizarTarefa(tarefa)
+);
 
 let editandoPorId = null;
 
@@ -37,6 +41,22 @@ const botaoLimpar = formulario.querySelector('button[type="reset"]');
 const statusMultiplo = document.getElementById("status-multiplo");
 
 const botaoStatusMultiplo = document.getElementById("btn-status-multiplo");
+
+const campoDataTermino = document.getElementById("data-termino");
+
+const campoRecorrencia = document.getElementById("recorrencia");
+
+// SINCRONIZAR OBRIGATORIEDADE DA DATA DE TÉRMINO
+
+const sincronizarObrigatoriedadeDataTermino = () => {
+  campoDataTermino.required = campoRecorrencia.value !== "NENHUMA";
+};
+
+campoRecorrencia.addEventListener("change", () => {
+  sincronizarObrigatoriedadeDataTermino();
+});
+
+sincronizarObrigatoriedadeDataTermino();
 
 
 //SETAR STATUS MULTIPLAS TAREFAS
@@ -81,13 +101,23 @@ formulario.addEventListener("submit", (event) => {
 
   const nome = document.getElementById("nome").value;
   const descricao = document.getElementById("descricao").value;
-  const dataTermino = document.getElementById("data-termino").value;
+  const dataTermino = campoDataTermino.value;
   const prioridade = Number(document.getElementById("prioridade").value);
   const categoria = document.getElementById("categoria").value;
   const status = document.getElementById("status").value;
+  const recorrencia = RECORRENCIAS_VALIDAS.includes(campoRecorrencia.value)
+    ? campoRecorrencia.value
+    : "NENHUMA";
+
+  if (recorrencia !== "NENHUMA" && !dataTermino.trim()) {
+    campoDataTermino.required = true;
+    return alert(
+      "A data de término é obrigatória para tarefas com recorrência!",
+    );
+  }
 
   if (editandoPorId === null) {
-    const tarefa = {
+    const tarefa = normalizarTarefa({
       id: proximoId++,
       nome: nome,
       descricao: descricao,
@@ -95,7 +125,10 @@ formulario.addEventListener("submit", (event) => {
       prioridade: prioridade,
       categoria: categoria,
       status: status,
-    };
+      recorrencia: recorrencia,
+      diaBaseRecorrencia: null,
+      sucessoraGerada: false,
+    });
 
     tarefas.push(tarefa);
     salvarTarefas();
@@ -104,12 +137,27 @@ formulario.addEventListener("submit", (event) => {
       return tarefa.id === editandoPorId;
     });
 
-    tarefaExistente.nome = nome;
-    tarefaExistente.descricao = descricao;
-    tarefaExistente.dataTermino = dataTermino;
-    tarefaExistente.prioridade = prioridade;
-    tarefaExistente.categoria = categoria;
-    tarefaExistente.status = status;
+    const preservarDiaBaseMensal =
+      recorrencia === "MENSAL" &&
+      tarefaExistente.recorrencia === "MENSAL" &&
+      tarefaExistente.dataTermino === dataTermino;
+
+    const tarefaAtualizada = normalizarTarefa({
+      ...tarefaExistente,
+      nome: nome,
+      descricao: descricao,
+      dataTermino: dataTermino,
+      prioridade: prioridade,
+      categoria: categoria,
+      status: status,
+      recorrencia: recorrencia,
+      diaBaseRecorrencia: preservarDiaBaseMensal
+        ? tarefaExistente.diaBaseRecorrencia
+        : null,
+      sucessoraGerada: Boolean(tarefaExistente.sucessoraGerada),
+    });
+
+    Object.assign(tarefaExistente, tarefaAtualizada);
 
     salvarTarefas();
   }
@@ -241,10 +289,15 @@ listaTarefas.addEventListener("click", (event) => {
 
     document.getElementById("nome").value = tarefa.nome;
     document.getElementById("descricao").value = tarefa.descricao;
-    document.getElementById("data-termino").value = tarefa.dataTermino;
+    campoDataTermino.value = tarefa.dataTermino;
     document.getElementById("prioridade").value = tarefa.prioridade;
     document.getElementById("categoria").value = tarefa.categoria;
     document.getElementById("status").value = tarefa.status;
+    campoRecorrencia.value = RECORRENCIAS_VALIDAS.includes(tarefa.recorrencia)
+      ? tarefa.recorrencia
+      : "NENHUMA";
+
+    sincronizarObrigatoriedadeDataTermino();
 
     botaoSubmit.textContent = "Salvar tarefa";
   }
@@ -271,10 +324,22 @@ listaTarefas.addEventListener("click", (event) => {
 
 //BOTAO PARA LIMPAR FORMULARIO
 
-botaoLimpar.addEventListener("click", () => {
+const restaurarFormularioPadrao = () => {
   editandoPorId = null;
 
   botaoSubmit.textContent = "Criar tarefa";
+
+  campoRecorrencia.value = "NENHUMA";
+
+  sincronizarObrigatoriedadeDataTermino();
+};
+
+botaoLimpar.addEventListener("click", () => {
+  restaurarFormularioPadrao();
+});
+
+formulario.addEventListener("reset", () => {
+  restaurarFormularioPadrao();
 });
 
 // CARREGAR TAREFAS AO ABRIR A APLICAÇÃO
