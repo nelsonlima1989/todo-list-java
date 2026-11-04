@@ -1,4 +1,9 @@
-import { RECORRENCIAS_VALIDAS, normalizarTarefa } from "./recorrencia.js";
+import {
+  RECORRENCIAS_VALIDAS,
+  deveGerarSucessora,
+  gerarTarefaSucessora,
+  normalizarTarefa,
+} from "./recorrencia.js";
 
 // ESTADO DA APLICAÇÃO
 
@@ -77,9 +82,21 @@ botaoStatusMultiplo.addEventListener("click", () => {
 
   const novoStatus = statusMultiplo.value;  
 
+  const novasTarefasSucessoras = [];
+
   tarefasSelecionadas.forEach((tarefa) => {
     tarefa.status = novoStatus;
+
+    if (deveGerarSucessora(tarefa)) {
+      const tarefaSucessora = gerarTarefaSucessora(tarefa, proximoId++);
+      tarefa.sucessoraGerada = true;
+      novasTarefasSucessoras.push(tarefaSucessora);
+    }
   });
+
+  if (novasTarefasSucessoras.length > 0) {
+    tarefas.push(...novasTarefasSucessoras);
+  }
 
   salvarTarefas();
 
@@ -131,6 +148,13 @@ formulario.addEventListener("submit", (event) => {
     });
 
     tarefas.push(tarefa);
+
+    if (deveGerarSucessora(tarefa)) {
+      const tarefaSucessora = gerarTarefaSucessora(tarefa, proximoId++);
+      tarefa.sucessoraGerada = true;
+      tarefas.push(tarefaSucessora);
+    }
+
     salvarTarefas();
   } else {
     const tarefaExistente = tarefas.find((tarefa) => {
@@ -158,6 +182,15 @@ formulario.addEventListener("submit", (event) => {
     });
 
     Object.assign(tarefaExistente, tarefaAtualizada);
+
+    if (deveGerarSucessora(tarefaExistente)) {
+      const tarefaSucessora = gerarTarefaSucessora(
+        tarefaExistente,
+        proximoId++
+      );
+      tarefaExistente.sucessoraGerada = true;
+      tarefas.push(tarefaSucessora);
+    }
 
     salvarTarefas();
   }

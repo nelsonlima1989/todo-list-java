@@ -132,7 +132,7 @@
 ---
 
 ### T04 — Implementar geração de sucessoras e prevenção de duplicações
-- **Status:** `[ ] Pendente`
+- **Status:** `[x] Concluída`
 - **Objetivo:** Conectar a geração automática de tarefas sucessoras (`status: "TODO"`) ao concluir uma tarefa recorrente (`DONE`) por criação direta, edição no formulário ou alteração de status em massa, garantindo a marcação `sucessoraGerada: true`, a não-duplicação após reabertura e o isolamento na edição/exclusão.
 - **Descrição das alterações:**
   - Em `frontend/js/script.js`:
