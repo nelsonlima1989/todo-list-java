@@ -165,4 +165,3 @@ Todo o desenvolvimento segue rigorosamente o fluxo **Spec-Driven Development**:
 5. **Um commit por tarefa:** Cada tarefa de implementação aprovada e validada deverá resultar em um commit próprio (atômico e semântico). Os commits de documentação, incluindo o commit da especificação aprovada (`docs/spec.md`), serão realizados separadamente, sempre mediante autorização explícita do usuário.
 6. **Sincronia da especificação:** Caso surja qualquer alteração de requisito ou regra de negócio durante o desenvolvimento, atualizar `docs/spec.md` **antes** de alterar o código.
 7. **Validação obrigatória:** Nenhuma tarefa é considerada concluída sem validação prática dos seus critérios de aceite e verificação de ausência de regressões.
-

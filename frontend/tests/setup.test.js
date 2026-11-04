@@ -35,4 +35,3 @@ describe("Ambiente de testes Frontend (Vitest + jsdom)", () => {
     expect(localStorage.getItem(chave)).toBeNull();
   });
 });
-

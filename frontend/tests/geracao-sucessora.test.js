@@ -677,4 +677,3 @@ describe("T04 — Geração automática de sucessoras e prevenção de duplicaç
     expect(tarefasAposSegundaExecucao).toEqual(tarefasAposPrimeiraExecucao);
   });
 });
-

@@ -482,4 +482,3 @@ describe("T05 — Indicadores de recorrência nos cartões, filtros por status e
     expect(document.getElementById("total-tarefas").textContent).toBe("0");
   });
 });
-

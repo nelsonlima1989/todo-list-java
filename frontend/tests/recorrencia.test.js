@@ -464,4 +464,3 @@ describe("Módulo puro de recorrência e cálculo de datas (recorrencia.js)", ()
     });
   });
 });
-

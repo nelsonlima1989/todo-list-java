@@ -259,4 +259,3 @@ Cada tarefa de implementação (`T01` a `T06`), após concluída, revisada via `
 4. `feat(frontend): implementa geracao de sucessoras e prevencao de duplicacoes (#1)` (`T04`)
 5. `feat(frontend): exibe indicador de recorrencia nos cartoes de tarefa (#1)` (`T05`)
 6. `test(frontend): adiciona testes ponta a ponta de criterios de aceite e regressao (#1)` (`T06`)
-
