@@ -38,7 +38,7 @@
 ## 3. Detalhamento das Tarefas (`T01` a `T06`)
 
 ### T01 — Configurar Vitest e jsdom no frontend
-- **Status:** `[ ] Pendente`
+- **Status:** `[x] Concluída`
 - **Objetivo:** Configurar a infraestrutura de testes automatizados com **Vitest** e **jsdom** exclusivamente dentro do diretório `frontend/`, sem impactar a raiz ou o projeto Gradle/Java.
 - **Descrição das alterações:**
   - Criar `frontend/package.json` com `"private": true`, scripts `"test": "vitest run"` e `"test:watch": "vitest"`, e `devDependencies` contendo `vitest` e `jsdom`.
