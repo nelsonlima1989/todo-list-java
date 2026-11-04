@@ -237,6 +237,10 @@ botaoStatusMultiplo.addEventListener("click", () => {
     tarefas.push(...novasTarefasSucessoras);
   }
 
+  if (editandoPorId !== null && idsSelecionados.includes(editandoPorId)) {
+    document.getElementById("status").value = novoStatus;
+  }
+
   salvarTarefas();
 
   renderizarTarefas(); 
@@ -543,17 +547,18 @@ const restaurarFormularioPadrao = () => {
 
   botaoSubmit.textContent = "Criar tarefa";
 
+  Array.from(campoRecorrencia.options).forEach((opcao) => {
+    opcao.defaultSelected = opcao.value === "NENHUMA";
+  });
+
   campoRecorrencia.value = "NENHUMA";
 
   sincronizarObrigatoriedadeDataTermino();
 };
 
-botaoLimpar.addEventListener("click", () => {
-  restaurarFormularioPadrao();
-});
-
 formulario.addEventListener("reset", () => {
   restaurarFormularioPadrao();
+  queueMicrotask(sincronizarObrigatoriedadeDataTermino);
 });
 
 // CARREGAR TAREFAS AO ABRIR A APLICAÇÃO
