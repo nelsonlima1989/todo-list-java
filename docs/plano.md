@@ -66,7 +66,7 @@
 ---
 
 ### T02 — Implementar módulo puro de cálculo de datas e regras de recorrência
-- **Status:** `[ ] Pendente`
+- **Status:** `[x] Concluída`
 - **Objetivo:** Implementar em `frontend/js/recorrencia.js` todas as funções puras de cálculo de datas, avanço para data estritamente futura, preservação de `diaBaseRecorrencia` em meses curtos/bissextos, verificação de elegibilidade (`sucessoraGerada`) e normalização de tarefas antigas do `localStorage`, de forma independente do DOM e utilizando ES Modules nativos.
 - **Descrição das alterações:**
   - Criar `frontend/js/recorrencia.js` utilizando **ES Modules nativos** (`export const ...`, sem bundler), garantindo compatibilidade direta tanto com o `import` nativo do navegador via `frontend/js/script.js` quanto com os testes no **Vitest**, contendo:
