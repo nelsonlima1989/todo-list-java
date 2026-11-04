@@ -193,7 +193,7 @@
 ---
 
 ### T06 — Completar suíte de testes de critérios de aceite (CA01 a CA11) e validar regressões
-- **Status:** `[ ] Pendente`
+- **Status:** `[x] Concluída`
 - **Objetivo:** Priorizar os testes de regressão das funcionalidades pré-existentes do ToDo List e complementar a validação integrada de quaisquer critérios de aceite (`CA01` a `CA11`) ainda não cobertos integralmente, evitando duplicar desnecessariamente os testes unitários e de integração já criados nas tarefas `T02` a `T05`.
 - **Descrição das alterações:**
   - Criar `frontend/tests/regressao-e-aceite.test.js` priorizando:
